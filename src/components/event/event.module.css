@@ -1,0 +1,16 @@
+.container {
+    display: inline-block;
+    background-color: rgb(70, 70, 70);
+    width: 250px;
+}
+
+.container > img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.container > h1 {
+    margin: 0 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
