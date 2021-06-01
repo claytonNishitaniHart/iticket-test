@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TicketDropdown from '../ticketDropdown/ticketDropdown';
 
-const GeneralAdmissionPicker = () => {
-  const ticketLimit = 15;
+const GeneralAdmissionPicker = ({ areaInfo, bookingLimit }) => {
   const [ticketNum, setTicketNum] = useState(0);
 
   const updateTicketNum = (newNum) => {
@@ -11,11 +10,14 @@ const GeneralAdmissionPicker = () => {
 
   return (
     <div>
-      <p>{ticketNum} / {ticketLimit}</p>
+      <p>{areaInfo.name}</p>
+      <p>{ticketNum} / {bookingLimit}</p>
       <form>
-        <TicketDropdown name='ticket 1' updateFunc={updateTicketNum} remainder={ticketLimit - ticketNum} />
-        <TicketDropdown name='ticket 2' updateFunc={updateTicketNum} remainder={ticketLimit - ticketNum} />
-        <TicketDropdown name='ticket 2' updateFunc={updateTicketNum} remainder={ticketLimit - ticketNum} />
+        {areaInfo.priceIds.map((id, index) => {
+          return (
+            <TicketDropdown key={index} id={id} updateFunc={updateTicketNum} remainder={bookingLimit - ticketNum} />
+          );
+        })}
       </form>
     </div>
   )

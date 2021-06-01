@@ -1,9 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
+import CallApi from '../../util/apiCalls';
 
-const TicketDropdown = ({ name, updateFunc, remainder }) => {
+const TicketDropdown = ({ id, updateFunc, remainder }) => {
   const [currentValue, setCurrentValue] = useState(0);
+  const [priceInfo, setPriceInfo] = useState({});
   const select = useRef();
 
+  useEffect(() => {
+    const initialisePriceInfo = async () => {
+      const info = await CallApi(`prices/${id}`);
+      setPriceInfo(info);
+    };
+    initialisePriceInfo();
+  })
 
   useEffect(() => {
     select.current.length = 0;
@@ -21,7 +30,7 @@ const TicketDropdown = ({ name, updateFunc, remainder }) => {
 
   return (
     <label>
-      {name}:
+      {priceInfo.priceName} ${priceInfo.price}:
       <select ref={select} onChange={handleUpdate} />
     </label>
   )

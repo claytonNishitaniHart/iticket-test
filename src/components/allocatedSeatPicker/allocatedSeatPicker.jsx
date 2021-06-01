@@ -4,7 +4,7 @@ import SeatButton from '../seatButton/seatButton';
 import TicketButton from '../ticketButton/ticketButton';
 import styles from './allocatedSeatPicker.module.css';
 
-const AllocatedSeatPicker = ({ seatIDs, updateCart }) => {
+const AllocatedSeatPicker = ({ seatIds, updateCart }) => {
     const [seatsInCart, setSeatsInCart] = useState([]);
     const [selectedId, setSelectedId] = useState(0);
     const [priceIds, setPriceIds] = useState([]);
@@ -28,7 +28,7 @@ const AllocatedSeatPicker = ({ seatIDs, updateCart }) => {
     return (
         <div className={styles.container}>
             <div className={styles.seatGrid}>
-                {seatIDs.map(seat => {
+                {seatIds.map(seat => {
                     return (
                         <SeatButton key={seat} id={seat} selectedId={selectedId} seatsInCart={seatsInCart} updateSelectedId={updateSelectedId} />
                     );
