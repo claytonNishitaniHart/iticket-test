@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import CallApi from '../../util/apiCalls';
 import styles from './ticketButton.module.css';
 
 const TicketButton = ({ id, seatId, updateCart, seatsInCart, updateSeatsInCart, updateSelectedId }) => {
     const [ticketInfo, setTicketInfo] = useState({});
 
     useEffect(() => {
-        fetch(`https://technical-test-api.azurewebsites.net/prices/${id}`)
-        .then(response => response.json())
-        .then(json => setTicketInfo(json));
+        const initialiseTicketInfo = async () => {
+            const ticket = await CallApi(`prices/${id}`);
+            setTicketInfo(ticket);
+        }
+        initialiseTicketInfo();
     }, [id]);
 
     const handleClick = () => {

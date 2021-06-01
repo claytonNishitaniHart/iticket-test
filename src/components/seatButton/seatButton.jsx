@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CallApi from '../../util/apiCalls';
 import styles from './seatButton.module.css';
 
 const SeatButton = ({ id, selectedId, updateSelectedId, seatsInCart }) => {
@@ -7,14 +8,16 @@ const SeatButton = ({ id, selectedId, updateSelectedId, seatsInCart }) => {
     const seatStatuses = [styles.available, styles.pending, styles.booked, styles.sold];
 
     useEffect(() => {
-        fetch(`https://technical-test-api.azurewebsites.net/allocated-seats/${id}`)
-        .then(response => response.json())
-        .then(json => setSeatStatus(json.status));
+        const initialiseSeatStatus = async () => {
+            const seat = await CallApi(`allocated-seats/${id}`);
+            setSeatStatus(seat.status);
+        }
+        initialiseSeatStatus();
     }, [id]);
 
     useEffect(() => {
         seatsInCart.includes(id) ? setSeatStatus(2) : setSeatStatus(seatStatus);
-    }, [seatsInCart]);
+    }, [seatsInCart, id, seatStatus]);
 
     const handleClick = () => {
         updateSelectedId(selectedId === id ? 0 : id);
