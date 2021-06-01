@@ -4,19 +4,14 @@ const TicketDropdown = ({ name, updateFunc, remainder }) => {
   const [currentValue, setCurrentValue] = useState(0);
   const select = useRef();
 
-  useEffect(() => {
-    for (let i = 0; i < 11; i++) {
-      select.current[i] = new Option(i, i);
-    }
-  }, []);
 
   useEffect(() => {
-    if (parseInt(select.current.value) + remainder < 10) {
-      for (let i = 10; i > parseInt(select.current.value) + remainder; i--) {
-        select.current[i] = null;
-      }
+    select.current.length = 0;
+    for (let i = 0; i < Math.min(11, currentValue + remainder + 1); i++) {
+      select.current[i] = new Option(i, i);
     }
-  }, [remainder]);
+    select.current.value = currentValue;
+  }, [remainder, currentValue]);
 
   const handleUpdate = () => {
     let valueDiff = parseInt(select.current.value) - currentValue;
