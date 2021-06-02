@@ -4,7 +4,7 @@ import SeatButton from '../seatButton/seatButton';
 import TicketButton from '../ticketButton/ticketButton';
 import styles from './allocatedSeatPicker.module.css';
 
-const AllocatedSeatPicker = ({ seatIds, updateCart }) => {
+const AllocatedSeatPicker = ({ eventName, seatIds, updateCart }) => {
     const [seatsInCart, setSeatsInCart] = useState([]);
     const [selectedId, setSelectedId] = useState(0);
     const [priceIds, setPriceIds] = useState([]);
@@ -39,7 +39,7 @@ const AllocatedSeatPicker = ({ seatIds, updateCart }) => {
                     <h1>Prices:</h1>
                     {priceIds.map(id => {
                         return (
-                            <TicketButton key={id} id={id} seatId={selectedId} updateCart={updateCart} seatsInCart={seatsInCart} updateSeatsInCart={updateSeatsInCart} updateSelectedId={updateSelectedId} />
+                            <TicketButton key={id} id={id} seatId={selectedId} eventName={eventName} updateCart={updateCart} seatsInCart={seatsInCart} updateSeatsInCart={updateSeatsInCart} updateSelectedId={updateSelectedId} />
                         );
                     })}
                 </div> : <></>}

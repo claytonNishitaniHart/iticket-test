@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CallApi from '../../util/apiCalls';
 import GeneralAdmissionPicker from '../generalAdmissionPicker/generalAdmissionPicker';
 
-const GeneralAdmissionAreas = ({ areaIds, bookingLimit }) => {
+const GeneralAdmissionAreas = ({ eventName, areaIds, bookingLimit, updateCart }) => {
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const GeneralAdmissionAreas = ({ areaIds, bookingLimit }) => {
     <div>
       {areas.map((area, index) => {
         return (
-          <GeneralAdmissionPicker key={index} areaInfo={area} bookingLimit={bookingLimit} />
+          <GeneralAdmissionPicker key={index} eventName={eventName} areaInfo={area} bookingLimit={bookingLimit} updateCart={updateCart} />
         );
       })}
     </div>

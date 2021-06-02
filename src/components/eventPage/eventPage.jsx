@@ -21,7 +21,7 @@ const EventPage = ({ updateCart }) => {
             <img src={eventInfo.imageUrl} alt='event' />
             <h1>{eventInfo.name}</h1>
             <div>
-                {eventInfo.type === 'allocated' ? <AllocatedSeatPicker seatIds={eventInfo.allocatedSeatIds} updateCart={updateCart} /> : <GeneralAdmissionAreas areaIds={eventInfo.gaAreaIds} bookingLimit={eventInfo.bookingLimit} updateCart={updateCart} />}
+                {eventInfo.type === 'allocated' ? <AllocatedSeatPicker eventName={eventInfo.name} seatIds={eventInfo.allocatedSeatIds} updateCart={updateCart} /> : <GeneralAdmissionAreas eventName={eventInfo.name} areaIds={eventInfo.gaAreaIds} bookingLimit={eventInfo.bookingLimit} updateCart={updateCart} />}
             </div>
         </>
     );

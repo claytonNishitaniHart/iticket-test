@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import CallApi from '../../util/apiCalls';
 
-const TicketDropdown = ({ id, updateFunc, remainder }) => {
+const TicketDropdown = ({ id, eventName, updateFunc, remainder, updateCart }) => {
   const [currentValue, setCurrentValue] = useState(0);
   const [priceInfo, setPriceInfo] = useState({});
   const select = useRef();
@@ -12,7 +12,7 @@ const TicketDropdown = ({ id, updateFunc, remainder }) => {
       setPriceInfo(info);
     };
     initialisePriceInfo();
-  })
+  }, [id]);
 
   useEffect(() => {
     select.current.length = 0;
@@ -26,6 +26,12 @@ const TicketDropdown = ({ id, updateFunc, remainder }) => {
     let valueDiff = parseInt(select.current.value) - currentValue;
     setCurrentValue(parseInt(select.current.value));
     updateFunc(valueDiff);
+    updateCart({
+      eventName: eventName,
+      ticketType: priceInfo.priceName,
+      price: priceInfo.price,
+      quantity: select.current.value
+    })
   }
 
   return (

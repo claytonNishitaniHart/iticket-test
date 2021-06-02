@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TicketDropdown from '../ticketDropdown/ticketDropdown';
 
-const GeneralAdmissionPicker = ({ areaInfo, bookingLimit }) => {
+const GeneralAdmissionPicker = ({ eventName, areaInfo, bookingLimit, updateCart }) => {
   const [ticketNum, setTicketNum] = useState(0);
 
   const updateTicketNum = (newNum) => {
@@ -15,7 +15,7 @@ const GeneralAdmissionPicker = ({ areaInfo, bookingLimit }) => {
       <form>
         {areaInfo.priceIds.map((id, index) => {
           return (
-            <TicketDropdown key={index} id={id} updateFunc={updateTicketNum} remainder={bookingLimit - ticketNum} />
+            <TicketDropdown key={index} id={id} eventName={eventName} updateFunc={updateTicketNum} remainder={bookingLimit - ticketNum} updateCart={updateCart} />
           );
         })}
       </form>
